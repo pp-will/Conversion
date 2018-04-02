@@ -1,5 +1,6 @@
 package com.example.meterstoinches;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,14 +22,37 @@ public class MainActivity extends AppCompatActivity {
         convertButton = findViewById(R.id.convertButton);
         editMeters = findViewById(R.id.editMeters);
         showMeters = findViewById(R.id.showMeters);
+
+        convertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                double result = 0.0; //holder
+                if(editMeters.getText().toString().equals("")) {
+                    showMeters.setText(R.string.error_message);
+                    showMeters.setTextColor(Color.RED);
+                } else {
+                    double meters =Double.parseDouble(editMeters.getText().toString());
+                    result = meters * CONVERSION;
+                    showMeters.setTextColor(Color.DKGRAY);
+                    showMeters.setText(String.format("%.2f", result) + " inches");
+                }
+            }
+        });
     }
 
-    public void convertMetersToInches(View view) {
+
+
+   /* public void convertMetersToInches(View view) {
         double result = 0.0; //holder
         double meters =Double.parseDouble(editMeters.getText().toString());
 
-        result = meters * CONVERSION;
+        if(editMeters.getText().toString().equals("")) {
+            showMeters.setText(R.string.error_message);
+            showMeters.setTextColor(Color.RED);
+        } else {
+            result = meters * CONVERSION;
+            showMeters.setTextColor(Color.DKGRAY);
+            showMeters.setText(String.format("%.2f", result) + " inches");
+        }*/
 
-        showMeters.setText(String.format("%.2f", result) + " inches");
-    }
 }
